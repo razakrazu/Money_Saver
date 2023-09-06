@@ -1,10 +1,10 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:new_project/screens/Static/chart/chart_db.dart';
 import 'package:new_project/screens/category/db_category/db_screen.dart';
 import 'package:new_project/screens/category/model_categary/model_screen.dart';
 import 'package:new_project/screens/home/balance.dart';
+import 'package:new_project/screens/static/db_static/chart_db.dart';
 import 'package:new_project/screens/transactions/db/transaction_db.dart';
 import 'package:new_project/screens/transactions/model/transaction_model.dart';
 
@@ -39,7 +39,7 @@ class _EditTransactionState extends State<EditTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    CategoryDB.instance.refreshUI();
+    CategoryDB.instince.refreshUI();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
@@ -79,11 +79,11 @@ class _EditTransactionState extends State<EditTransaction> {
                         children: [
                           Radio(
                               activeColor: Colors.blueGrey,
-                              value: CategoryType.Expense,
+                              value: CategoryType.expense,
                               groupValue: selectedCategoryType,
                               onChanged: (newvalue) {
                                 setState(() {
-                                  selectedCategoryType = CategoryType.Expense;
+                                  selectedCategoryType = CategoryType.expense;
                                   categoryID = null;
                                 });
                               }),
@@ -300,3 +300,7 @@ class _EditTransactionState extends State<EditTransaction> {
     ));
   }
 }
+
+
+
+

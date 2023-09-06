@@ -70,7 +70,7 @@ String yesterday = DateFormat.yMd().format(
   for (var element in list) {
     if (element.category.type == CategoryType.income) {
       incomeNotifier1.value.add(element);
-    } else if (element.category.type == CategoryType.Expense) {
+    } else if (element.category.type == CategoryType.expense) {
       expenseNotifier1.value.add(element);
     }
 
@@ -110,11 +110,11 @@ String yesterday = DateFormat.yMd().format(
       incomeYesterdayNotifier.value.add(element);
     }
 
-    if (elementDate == today && element.type == CategoryType.Expense) {
+    if (elementDate == today && element.type == CategoryType.expense) {
       expenseTodayNotifier.value.add(element);
     }
 
-    if (elementDate == yesterday && element.type == CategoryType.Expense) {
+    if (elementDate == yesterday && element.type == CategoryType.expense) {
       expenseYesterdayNotifier.value.add(element);
     }
     if (element.date.isAfter(
@@ -131,7 +131,7 @@ String yesterday = DateFormat.yMd().format(
             const Duration(days: 7),
           ),
         ) &&
-        element.type == CategoryType.Expense) {
+        element.type == CategoryType.expense) {
       expenseLastWeekNotifier.value.add(element);
     }
 
@@ -149,7 +149,7 @@ String yesterday = DateFormat.yMd().format(
             const Duration(days: 30),
           ),
         ) &&
-        element.type == CategoryType.Expense) {
+        element.type == CategoryType.expense) {
       expenseLastMonthNotifier.value.add(element);
     }
   }
@@ -186,3 +186,11 @@ String yesterday = DateFormat.yMd().format(
   expenseLastMonthNotifier.notifyListeners();
   // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member
 }
+
+
+
+
+
+
+
+

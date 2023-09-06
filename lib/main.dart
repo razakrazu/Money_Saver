@@ -42,16 +42,17 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.ss
   @override
   Widget build(BuildContext context) {
-       CategoryDB.instance.refreshUI();
+       CategoryDB.instince.refreshUI();
     TransactionDb.instance.refresh();
  balanceAmount();
+//  filterFunction();
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
      
         primarySwatch: Colors.blueGrey,
       ),
-      home:SplashScreen(),
+home:   const  SplashScreen(),
       
       debugShowCheckedModeBanner: false,
     );

@@ -1,3 +1,61 @@
+// import 'package:flutter/material.dart';
+// import 'package:new_project/screens/category/db_category/db_screen.dart';
+// import 'package:new_project/screens/category/expense_screen.dart';
+// import 'package:new_project/screens/category/income_screen.dart';
+// import 'package:new_project/screens/category/popup_screen.dart';
+
+
+// class CategoryScreen extends StatefulWidget {
+//   const CategoryScreen({super.key});
+
+//   @override
+//   State<CategoryScreen> createState() => _CategoryScreenState();
+// }
+
+// class _CategoryScreenState extends State<CategoryScreen> {
+//   get texteditcntrl => null;
+
+//   @override
+//   void initState() {
+//     CategoryDB().refreshUI();
+//     super.initState();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return DefaultTabController(
+//       length: 2,
+//       child: Scaffold(
+//         // drawer:  MenuScreen(),
+//         appBar: AppBar(
+//           backgroundColor:Colors.blueGrey,
+//           bottom: const TabBar(
+//             tabs: [
+//               Tab(
+//                 text: 'Income',
+//               ),
+//               Tab(
+//                 text: 'Expense',
+//               )
+//             ],
+//             indicatorColor: Color.fromARGB(255, 240, 240, 243),
+//           ),
+//           title: const Text('Category',style: TextStyle(color: Colors.white, fontSize: 24),),
+//           centerTitle: true,
+//         ),
+//         body: const TabBarView(children: [
+//           IncomeScreen(),
+//           ExpenseScreen(),
+//         ]),
+//        floatingActionButton: FloatingActionButton(onPressed: (){
+//                    ShowCategaryPopup(context, texteditcntrl);
+//        }, child:Icon(Icons.add) ,),
+//       ),
+
+//     );
+    
+//   }
+// }
 import 'package:flutter/material.dart';
 import 'package:new_project/screens/category/db_category/db_screen.dart';
 import 'package:new_project/screens/category/expense_screen.dart';
@@ -67,7 +125,7 @@ class _ScreenCategogryState extends State<ScreenCategogry>
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          ShowCategaryPopup(context,texteditcntrl);
+          ShowCategaryPopup(context, texteditcntrl);
         },
         child: Icon(Icons.add),
       ),

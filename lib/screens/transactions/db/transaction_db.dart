@@ -8,6 +8,8 @@ import 'package:new_project/screens/transactions/model/transaction_model.dart';
 const TRANSACTION_DB_NAME = 'transaction-db';
 
 abstract class TransactionDbFunction {
+  static var instance;
+
   Future<void> addTransaction(TranscationModel obj);
   Future<List<TranscationModel>> getAllTransaction();
   Future<void> deletTransaction(int index);
@@ -27,7 +29,9 @@ class TransactionDb implements TransactionDbFunction {
   @override
   Future<void> addTransaction(TranscationModel obj) async {
     final db = await Hive.openBox<TranscationModel>(TRANSACTION_DB_NAME);
+  
     await db.add(obj);
+    
   }
 
   Future<void> refresh() async {
@@ -42,6 +46,7 @@ class TransactionDb implements TransactionDbFunction {
   @override
   Future<List<TranscationModel>> getAllTransaction() async {
     final db = await Hive.openBox<TranscationModel>(TRANSACTION_DB_NAME);
+    
     return db.values.toList();
   }
 
@@ -76,7 +81,7 @@ class TransactionDb implements TransactionDbFunction {
     } else if (selectedCatogory == 'Expense') {
       filteredList = db.values
           .where((element) =>
-              element.type == CategoryType.Expense &&
+              element.type == CategoryType.expense &&
               element.category.name
                   .toLowerCase()
                   .trim()
@@ -120,7 +125,7 @@ class TransactionDb implements TransactionDbFunction {
       } else if (selectedCatogory == "Expense") {
         dateFilterList = TransactionDb.values
             .where((element) =>
-                element.type == CategoryType.Expense &&
+                element.type == CategoryType.expense &&
                 element.date.day == DateTime.now().day &&
                 element.date.month == DateTime.now().month &&
                 element.date.year == DateTime.now().year)
@@ -147,7 +152,7 @@ class TransactionDb implements TransactionDbFunction {
       } else if (selectedCatogory == "Expense") {
         dateFilterList = TransactionDb.values
             .where((element) =>
-                element.type == CategoryType.Expense &&
+                element.type == CategoryType.expense &&
                 element.date.day == DateTime.now().day - 1 &&
                 element.date.month == DateTime.now().month &&
                 element.date.year == DateTime.now().year)
@@ -176,7 +181,7 @@ class TransactionDb implements TransactionDbFunction {
       } else if (selectedCatogory == "Expense") {
         dateFilterList = TransactionDb.values
             .where((element) =>
-                element.type == CategoryType.Expense &&
+                element.type == CategoryType.expense &&
                 element.date.isAfter(weekAgo) &&
                 element.date.isBefore(today))
             .toList();
@@ -213,7 +218,7 @@ class TransactionDb implements TransactionDbFunction {
           await Hive.openBox<TranscationModel>(TRANSACTION_DB_NAME);
       transactionListNotifier.value.clear();
       transactionListNotifier.value.addAll(transactionDB.values
-          .where((element) => element.type == CategoryType.Expense)
+          .where((element) => element.type == CategoryType.expense)
           .toList());
       selectedCatogory = "Expense";
 
@@ -233,3 +238,5 @@ class TransactionDb implements TransactionDbFunction {
     await refresh();
   }
 }
+
+

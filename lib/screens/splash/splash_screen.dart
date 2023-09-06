@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
+import 'package:new_project/screens/bottom_navigegeion/bottom_navigation.dart';
 import 'package:new_project/screens/welcome/welcome_screens.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -12,15 +13,7 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
 
-  void initState() {
-    super.initState();
- 
-     Future.delayed( const Duration(seconds: 5),
-      () => Navigator.push(context,
-              MaterialPageRoute(builder: (context) => WelcomeScreen(),
-            )));       
- 
-}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,12 +22,17 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children:<Widget> [
-            SizedBox(child:Text('MONEY SAVER',style: TextStyle(fontSize: 30,color: Colors.white),),
+            Container( 
+              height: 90,
+               child: const   Image(image: AssetImage('assets/wallet_4864209.png')),),
+         
+     const         SizedBox(child:Text('SPENT SMART',style: TextStyle(fontSize: 20,color: Color.fromARGB(255, 223, 223, 223)),),
              
              ),
+            
             Container(
-              color: Colors.white,
-              child: SizedBox(
+              color: Colors.blueGrey,
+              child: const  SizedBox(
                 
                 ),
             ),
@@ -44,5 +42,35 @@ class _SplashScreenState extends State<SplashScreen> {
       
       
     );
+  }
+   @override
+  void initState() {
+    checkUserLoggedIn();
+    super.initState();
+  }
+
+  Future<void> gotoLogin() async {
+    await Future.delayed(const Duration(seconds: 2));
+    // ignore: use_build_context_synchronously
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+      builder: (ctx1) => const  WelcomeScreen(),
+    ));
+  }
+
+  Future<void> checkUserLoggedIn() async {
+    final sharedPrefs = await SharedPreferences.getInstance();
+    final userLogged = sharedPrefs.getString('nameKey');
+    if (userLogged == null) {
+      gotoLogin();
+    } else {
+      await Future.delayed(const Duration(seconds: 2));
+      if (!mounted) {
+        return;
+      }
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (ctx1) => const  BottomNavigationScreen(),
+      )
+      );
+    }
   }
 }

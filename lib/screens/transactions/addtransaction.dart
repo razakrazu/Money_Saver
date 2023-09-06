@@ -5,13 +5,13 @@ import 'package:intl/intl.dart';
 import 'package:new_project/screens/category/db_category/db_screen.dart';
 import 'package:new_project/screens/category/model_categary/model_screen.dart';
 import 'package:new_project/screens/home/balance.dart';
+import 'package:new_project/screens/static/db_static/chart_db.dart';
 import 'package:new_project/screens/transactions/db/transaction_db.dart';
 import 'package:new_project/screens/transactions/model/transaction_model.dart';
 
-import '../Static/chart/chart_db.dart';
 
 class AddTransaction extends StatefulWidget {
-  const AddTransaction({Key? key}) : super(key: key);
+  const AddTransaction({Key? key, required List<TranscationModel> transactions}) : super(key: key);
 
   @override
   State<AddTransaction> createState() => _AddTransactionState();
@@ -30,9 +30,10 @@ class _AddTransactionState extends State<AddTransaction> {
 
   @override
   Widget build(BuildContext context) {
-    CategoryDB.instance.refreshUI();
+    CategoryDB.instince.refreshUI();
     TransactionDb.instance.refresh();
     filterFunction();
+   
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blueGrey,
@@ -76,11 +77,11 @@ class _AddTransactionState extends State<AddTransaction> {
                         children: [
                           Radio(
                             activeColor: Colors.blueGrey,
-                            value: CategoryType.Expense,
+                            value: CategoryType.expense,
                             groupValue: selectedCategoryType,
                             onChanged: (newvalue) {
                               setState(() {
-                                selectedCategoryType = CategoryType.Expense;
+                                selectedCategoryType = CategoryType.expense;
                                 _categoryID = null;
                               });
                             },
@@ -319,3 +320,10 @@ class _AddTransactionState extends State<AddTransaction> {
     );
   }
 }
+
+
+
+
+
+
+

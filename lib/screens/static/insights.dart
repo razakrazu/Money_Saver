@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:new_project/screens/Static/chart/chart_db.dart';
 import 'package:new_project/screens/category/db_category/db_screen.dart';
+import 'package:new_project/screens/static/db_static/chart_db.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 import '../transactions/db/transaction_db.dart';
@@ -41,7 +41,6 @@ class _FinancialReportState extends State<FinancialReport>
     filterFunction();
     CategoryDB().refreshUI();
     TransactionDb().refresh();
-
     super.initState();
   }
 
@@ -50,7 +49,7 @@ class _FinancialReportState extends State<FinancialReport>
 
   @override
   Widget build(BuildContext context) {
-    CategoryDB.instance.refreshUI();
+    CategoryDB.instince.refreshUI();
     TransactionDb.instance.refresh();
     filterFunction();
     chartdivertFunctionOverview();
@@ -348,3 +347,11 @@ class _FinancialReportState extends State<FinancialReport>
     }
   }
 }
+
+
+
+
+
+
+
+

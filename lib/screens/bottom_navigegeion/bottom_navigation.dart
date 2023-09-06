@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:new_project/screens/Static/insights.dart';
 import 'package:new_project/screens/category/screen_category.dart';
 import 'package:new_project/screens/home/home_screen%20copy.dart';
 import 'package:new_project/screens/settings/setting_screen.dart';
+import 'package:new_project/screens/static/insights.dart';
 import 'package:new_project/screens/transactions/viewallscreen.dart';
 import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
 
@@ -14,6 +14,7 @@ class BottomNavigationScreen extends StatefulWidget {
 }
 
 class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
+
   PersistentTabController controller = PersistentTabController(initialIndex: 0);
   
   List<Widget> _buildScreens() {
@@ -67,6 +68,7 @@ class _BottomNavigationScreenState extends State<BottomNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 219, 209, 209),
       body: PersistentTabView(

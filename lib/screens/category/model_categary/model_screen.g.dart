@@ -19,8 +19,8 @@ class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
     return CategoryModel(
       id: fields[0] as String,
       name: fields[1] as String,
-      isdeleted: fields[2] as bool,
       type: fields[3] as CategoryType,
+      isDeleted: fields[2] as bool,
     );
   }
 
@@ -33,7 +33,7 @@ class CategoryModelAdapter extends TypeAdapter<CategoryModel> {
       ..writeByte(1)
       ..write(obj.name)
       ..writeByte(2)
-      ..write(obj.isdeleted)
+      ..write(obj.isDeleted)
       ..writeByte(3)
       ..write(obj.type);
   }
@@ -59,7 +59,7 @@ class CategoryTypeAdapter extends TypeAdapter<CategoryType> {
       case 0:
         return CategoryType.income;
       case 1:
-        return CategoryType.Expense;
+        return CategoryType.expense;
       default:
         return CategoryType.income;
     }
@@ -71,7 +71,7 @@ class CategoryTypeAdapter extends TypeAdapter<CategoryType> {
       case CategoryType.income:
         writer.writeByte(0);
         break;
-      case CategoryType.Expense:
+      case CategoryType.expense:
         writer.writeByte(1);
         break;
     }

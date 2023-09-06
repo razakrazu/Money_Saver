@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:new_project/screens/transactions/model/transaction_model.dart';
 
 class ChartDatas {
@@ -35,3 +34,9 @@ chartLogic(List<TranscationModel> model) {
   }
   return newData;
 }
+
+
+
+
+
+

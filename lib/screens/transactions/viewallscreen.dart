@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
-import 'package:new_project/screens/Static/chart/chart_db.dart';
 import 'package:new_project/screens/category/db_category/db_screen.dart';
 import 'package:new_project/screens/category/model_categary/model_screen.dart';
 import 'package:new_project/screens/home/balance.dart';
+import 'package:new_project/screens/static/db_static/chart_db.dart';
 import 'package:new_project/screens/transactions/addtransaction.dart';
 import 'package:new_project/screens/transactions/db/transaction_db.dart';
 import 'package:new_project/screens/transactions/edit_transaction.dart';
@@ -32,10 +32,17 @@ class _VeiwAllScreenState extends State<VeiwAllScreen> {
   @override
   Widget build(BuildContext context) {
     TransactionDb.instance.refresh();
-    CategoryDB.instance.refreshUI();
+    CategoryDB.instince.refreshUI();
+     List<TranscationModel> transactions = [];
     return Scaffold(
         floatingActionButton: FloatingActionButton(onPressed: (){
-        Navigator.push(context, MaterialPageRoute(builder: (context)=> AddTransaction()));
+          TransactionDb.instance.refresh();
+    CategoryDB.instince.refreshUI();
+    
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> AddTransaction( 
+           transactions: transactions,
+          
+        ),),);
       },child: Icon(Icons.add),
       ),
       appBar: AppBar(
@@ -168,7 +175,7 @@ class _VeiwAllScreenState extends State<VeiwAllScreen> {
                                     leading: value.type == CategoryType.income
                                         ? CircleAvatar(
                                           radius: 23,
-                                          backgroundColor: Colors.green, 
+                                          backgroundColor: Color.fromARGB(255, 58, 156, 61), 
                                           child: const Icon(
                                               Icons.arrow_upward,
                                               color: Color.fromARGB(255, 67, 77, 67),
@@ -176,7 +183,7 @@ class _VeiwAllScreenState extends State<VeiwAllScreen> {
                                         )
                                         : CircleAvatar(
                                           radius: 23,
-                                          backgroundColor:  Colors.red,
+                                          backgroundColor:  Color.fromARGB(255, 199, 36, 24),
                                           child: const Icon(
                                            
                                               Icons.arrow_downward,
@@ -282,7 +289,7 @@ class _VeiwAllScreenState extends State<VeiwAllScreen> {
               style: TextStyle(fontWeight: FontWeight.bold, color:  Colors.blueGrey,),
             )),
       ],
-      // elevation: 8.0,
+      elevation: 8.0,
     );
   }
 
@@ -327,3 +334,13 @@ class _VeiwAllScreenState extends State<VeiwAllScreen> {
     return '${splitedDate.last}\n${splitedDate.first}';
   }
 }
+
+
+
+
+
+
+
+
+
+

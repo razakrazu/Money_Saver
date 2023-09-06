@@ -1,13 +1,16 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:intl/intl.dart';
-import 'package:new_project/screens/Static/chart/chart_db.dart';
 import 'package:new_project/screens/category/db_category/db_screen.dart';
 import 'package:new_project/screens/category/model_categary/model_screen.dart';
 import 'package:new_project/screens/home/balance.dart';
+import 'package:new_project/screens/static/db_static/chart_db.dart';
 import 'package:new_project/screens/transactions/db/transaction_db.dart';
 import 'package:new_project/screens/transactions/edit_transaction.dart';
 import 'package:new_project/screens/transactions/model/transaction_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class HomeScreens extends StatefulWidget {
@@ -16,17 +19,38 @@ class HomeScreens extends StatefulWidget {
   @override
   State<HomeScreens> createState() => _HomeScreensState();
 }
+String username='';
 
 class _HomeScreensState extends State<HomeScreens> {
-      List<TranscationModel> transactions = [];
+      
+      @override
+  void initState() {
+    TransactionDb.instance.refresh();
+      CategoryDB.instince.refreshUI();
+      autoLogIn(); 
+      balanceAmount();
 
+    super.initState();
+     
+
+  }
+
+  void autoLogIn() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      username = prefs.getString('nameKey').toString();
+    });
+  }
   @override
   Widget build(BuildContext context) {
 
      TransactionDb.instance.refresh();
-      CategoryDB.instance.refreshUI();
+      CategoryDB.instince.refreshUI();
+      balanceAmount();
     filterFunction();
 
+List<TranscationModel> transactions = [];
     return Scaffold(
 
       body: SafeArea(                   
@@ -46,16 +70,20 @@ class _HomeScreensState extends State<HomeScreens> {
                         bottomLeft: Radius.circular(25),
                       ),
                     ),
-                    child: const Padding(
+                    child:  Padding(
                       padding: const EdgeInsets.only(bottom: 200, left: 30),
                       child: Row(
                         children: [
-                          Text('Save Money',style: TextStyle(color: Colors.white),),
-                          SizedBox(
+                          Text( '$username',
+                          style: const  TextStyle(color: Colors.white),),
+                         const   SizedBox(
                             width: 220,
                             height: 1.0,
                           ),
-                          Icon(Icons.currency_rupee,color:Color.fromARGB(255, 255, 236, 236), ),
+                       Padding(
+                         padding: const EdgeInsets.only(left: 30),
+                         child: Icon(Icons.currency_rupee,color:Color.fromARGB(255, 255, 236, 236), ),
+                       ),
                         ],
                       ),
                     ),
@@ -72,16 +100,16 @@ class _HomeScreensState extends State<HomeScreens> {
                               height: 260,
                               width: 330,
                               decoration: BoxDecoration(
-                                color: Color.fromARGB(255, 173, 169, 169),
+                                color: const  Color.fromARGB(255, 173, 169, 169),
                                 borderRadius: BorderRadius.circular(40),
                               ),
                               child: Column(
                                 children: [
-                                  SizedBox(
+                        const            SizedBox(
                                     height: 30,
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
+                           const         Padding(
+                                    padding: EdgeInsets.symmetric(
                                         horizontal: 20),
                                     child: Row(
                                       mainAxisAlignment:
@@ -106,7 +134,7 @@ class _HomeScreensState extends State<HomeScreens> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
+                      const              SizedBox(
                                     height: 10,
                                   ),
                                   Padding(
@@ -121,22 +149,22 @@ class _HomeScreensState extends State<HomeScreens> {
                                           child: Text(
                                            totalnotifier.value.toString(),
                                            
-                                            style: TextStyle(
+                                            style: const  TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 26,
                                                 fontWeight: FontWeight.w600),
                                           ),
                                         ),
-                                        SizedBox(
+                                const          SizedBox(
                                           width: 100,
                                         ),
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
+                          const          SizedBox(
                                     height: 40,
                                   ),
-                                  Padding(
+                           const         Padding(
                                     padding:
                                         EdgeInsets.symmetric(horizontal: 20),
                                     child: Row(
@@ -161,8 +189,7 @@ class _HomeScreensState extends State<HomeScreens> {
                                         Row(
                                           children: [
                                             CircleAvatar(
-                                              backgroundColor: Color.fromARGB(
-                                                  255, 197, 8, 8),
+                                              backgroundColor: Color.fromARGB(255, 190, 8, 8),
                                               child: Icon(Icons.arrow_downward),
                                             ),
                                           ],
@@ -177,29 +204,29 @@ class _HomeScreensState extends State<HomeScreens> {
                                       ],
                                     ),
                                   ),
-                                  SizedBox(
+                         const           SizedBox(
                                     height: 13,
                                   ),
                                   Padding(
                                     padding:
-                                        EdgeInsets.symmetric(horizontal: 20),
+                           const               EdgeInsets.symmetric(horizontal: 20),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        SizedBox(
+                          const  SizedBox(
                                           height: 10,
                                         ),
                                         Text(
                                    
                                          incomenotifier.value.toString(),
-                                          style: TextStyle(
+                                          style: const  TextStyle(
                                               color: Colors.black,
                                               fontSize: 27,
                                               fontWeight: FontWeight.w600),
                                         ),
-                                        Padding(
-                                          padding: EdgeInsets.symmetric(
+                                         Padding(
+                                          padding: const  EdgeInsets.symmetric(
                                               horizontal: 20),
                                           child: Row(
                                             mainAxisAlignment:
@@ -207,7 +234,7 @@ class _HomeScreensState extends State<HomeScreens> {
                                             children: [
                                               Text(
                                                 expensenotifier.value.toString(),
-                                                style: TextStyle(
+                                                style: const  TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 27,
                                                     fontWeight:
@@ -232,17 +259,17 @@ class _HomeScreensState extends State<HomeScreens> {
               
             ),
 
-            Padding(padding: EdgeInsets.only(bottom:0)),
+        const      Padding(padding: EdgeInsets.only(bottom:0)),
              Expanded( 
               
                child: Stack(
                  children: [
-          Padding(
+  const          Padding(
             padding: const EdgeInsets.all(10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Text(
+                Text(
                   'Recent Transactions',
                   style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
@@ -302,24 +329,24 @@ class _HomeScreensState extends State<HomeScreens> {
                                         padding:
                                             const EdgeInsets.only(left: 10, right: 10),
                                         child: Card(
-                                          color: Color.fromARGB(255, 211, 209, 209),
+                                          color: const  Color.fromARGB(255, 211, 209, 209),
                                           elevation: 1,
                                           child: ListTile(
                                             shape: const StadiumBorder(),
                                             leading: value.type == CategoryType.income
-                                                ?CircleAvatar(
+                                                ? const  CircleAvatar(
                                                   radius: 23,
                                                     backgroundColor:  Colors.green,
-                                                  child: const Icon(
+                                                  child: Icon(
                                                       Icons.arrow_upward,
                                                 color: Color.fromARGB(255, 0, 0, 0),
 
                                                     ),
                                                 )
-                                                : CircleAvatar(
+                                                :  const CircleAvatar(
                                                   radius: 23,
                                                   backgroundColor:Color.fromARGB(255, 196, 58, 48) ,
-                                                  child: const Icon(
+                                                  child:  Icon(
                                                       Icons.arrow_downward,
                                                       color: Color.fromARGB(255, 0, 0, 0),
                                                     ),
@@ -336,7 +363,7 @@ class _HomeScreensState extends State<HomeScreens> {
                                     );
                                   },
                                   separatorBuilder: (ctx, index) {
-                                    return SizedBox(height: 2,);
+                                    return const  SizedBox(height: 2,);
                                   },
                                   // ignore: prefer_is_empty
                                   itemCount: newList.length > 4 ? 4 : newList.length
